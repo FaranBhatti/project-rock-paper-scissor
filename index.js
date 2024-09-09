@@ -1,3 +1,7 @@
+// Global Variables to track score
+let humanScore = 0;
+let computerScore = 0;
+
 /**
  * Gets the computer choice for the game Rock, Paper, Scissors
  * 
