@@ -1,7 +1,3 @@
-// Global Variables to track score
-let humanScore = 0;
-let computerScore = 0;
-
 /**
  * Gets the computer choice for the game Rock, Paper, Scissors
  * 
@@ -24,22 +20,18 @@ function getComputerChoice() {
 function getHumanChoice() {
 
     do {
-        let choice = prompt("Choose between Rock, Paper, or Scissors");
+        let choice = prompt("Choose between Rock, Paper, or Scissors").toLowerCase();
         var validChoice = false;
 
-        switch (choice.toLowerCase()) {
+        switch (choice) {
             case ("rock"):
-                validChoice = true;
-                return choice.toLocaleLowerCase();
+                return choice;
             case ("paper"):
-                validChoice = true;
-                return choice.toLocaleLowerCase();
-            case "scissors":
-                validChoice = true;
-                return choice.toLocaleLowerCase();
-            case "scissor":
-                validChoice = true;
-                return choice.toLocaleLowerCase();
+                return choice;
+            case ("scissors"):
+                return choice;
+            case ("scissor"):
+                return choice;
             default:
                 validChoice = false;
         }
@@ -49,45 +41,141 @@ function getHumanChoice() {
 /**
  * Gets the result of one round based off of the computers choice and the players choice
  * 
- * @returns null - increments the global score of whoever won the round
+ * @returns {gameResult} - Numerical return where 0 returned on player loss, 1 returned on player win, 2 returned on tie, 3 if we enter unknown state
  */
 function playRound(humanChoice, computerChoice) {
-    // if humanChoice and computerChoice is the same do nothing
-    if(humanChoice == computerChoice) {
-        console.log(`You and the computer chose ${humanChoice}. This round is a draw!`);
+    
+    let gameResult = 0;
+
+    switch (humanChoice) {
+        case computerChoice:
+            {
+                console.log(`You and the computer chose ${humanChoice}. This round is a draw!`);
+                gameResult = 2;
+                break;
+            }
+        case "rock":
+            {
+                if (computerChoice == "paper") {
+                    console.log("You lose! Paper beats Rock.");
+                }
+                else {
+                    console.log("You win! Rock beats scissors.");
+                    gameResult = 1;
+                }
+                break;
+            }
+        case "paper":
+            {
+                if (computerChoice == "rock") {
+                    console.log("You win! Paper beats rock.");
+                    gameResult = 1;
+                }
+                else {
+                    console.log("You lose! Scissors beats paper.");
+                }
+                break;
+            }
+        case "scissor":
+            {
+                if (computerChoice == "rock") {
+                    console.log("You lose! Rock beats scissors.");
+                }
+                else {
+                    console.log("You win! Scissors beats paper.");
+                    gameResult = 1;
+                }
+                break;
+            }
+        case "scissors":
+            {
+                if (computerChoice == "rock") {
+                    console.log("You lose! Rock beats scissors.");
+                }
+                else {
+                    console.log("You win! Scissors beats paper.");
+                    gameResult = 1;
+                }
+                break;
+            }
+        default:
+            {
+                console.log("We should never enter this use case.");
+                console.log(`The computer chose ${computerChoice} and the player chose ${humanChoice}`);
+                gameResult = 3;
+            }
     }
-    else if (humanChoice == "rock") {
-        if (computerChoice == "paper") {
-            console.log("You lose! Paper beats Rock.");
-            computerChoice++;
-        }
-        else {
-            console.log("You win! Rock beats scissors.");
-            humanScore++;
-        }
-    }
-    else if (humanChoice == ("scissor" || "scissors")) {
-        if (computerChoice == "rock") {
-            console.log("You lose! Rock beats scissors.");
-            computerScore++;
-        }
-        else {
-            console.log("You win! Scissors beats paper.");
-            humanScore++;
-        }
-    }
-    else if (humanChoice == "paper") {
-        if (computerChoice == "rock") {
-            console.log("You win! Paper beats rock.");
-            humanScore++;
-        }
-        else {
-            console.log("You lose! Scissors beats paper.");
-            computerScore++;
-        }
-    }
-    else {
-        console.log("We should never enter this use case.");
-        console.log(`The computer chose ${computerChoice} and the player chose ${humanChoice}`);
-    }
+
+    return gameResult;
 }
+
+/**
+ * Plays the game rock, paper, scissors. Highest score after 5 rounds is the winner
+ */
+function playGame() {
+    // Keeping track of the score
+    let playerScore = 0;
+    let computerScore = 0;
+
+    if (confirm("Welcome to Rock, Paper, Scissors. Ready to play?")) {
+        
+        let roundResult = 0;
+
+        for (let i = 1; i < 6; i++) {
+
+            let playerSelection = getHumanChoice();
+            let computerSelection = getComputerChoice();
+
+            roundResult = playRound(playerSelection, computerSelection);
+            console.log(`The round result is ${roundResult}.`)
+
+            switch (roundResult) {
+                case 0:
+                    {
+                        console.log(`COMPUTER WINS ROUND ${i}.`)
+                        computerScore++;
+                        break;
+                    }
+                case 1:
+                    {
+                        console.log(`PLAYER WINS ROUND ${i}.`)
+                        playerScore++;
+                        break;
+                    }
+                case 2:
+                    {
+                        console.log(`NEITHER WINS ROUND ${i}.`);
+                        break;
+                    }
+                case 3:
+                    {
+                        console.log("Error in playRound function. We entered an unknown state.");
+                        console.log(`roundResult in switch case 3: ${roundResult}`);
+                        break;
+                    }
+                default:
+                    {
+                        console.log("Error in playGame function. We enterted an unknown state.");
+                        console.log(`roundResult in switch default: ${roundResult}`);
+                        break;
+                    }
+            }
+        }
+
+        if (playerScore > computerScore) {
+            console.log(`You won the overall game. You won ${playerScore} rounds and the computer won ${computerScore} rounds.`);
+        }
+        else if (playerScore < computerScore) {
+            console.log(`You lost the overall game. You won ${playerScore} rounds and the computer won ${computerScore} rounds.`);
+        }
+        else {
+            console.log("Wow it looks like you both tied!");
+        }
+        
+    } else {
+        console.log("User clicked cancel");
+    }
+
+}
+
+playGame();
