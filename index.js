@@ -109,73 +109,71 @@ function playRound(humanChoice, computerChoice) {
     return gameResult;
 }
 
-/**
- * Plays the game rock, paper, scissors. Highest score after 5 rounds is the winner
- */
-function playGame() {
-    // Keeping track of the score
-    let playerScore = 0;
-    let computerScore = 0;
+// /**
+//  * Plays the game rock, paper, scissors. Highest score after 5 rounds is the winner
+//  */
+// function playGame() {
+//     // Keeping track of the score
+//     let playerScore = 0;
+//     let computerScore = 0;
 
-    if (confirm("Welcome to Rock, Paper, Scissors. Ready to play?")) {
+//     if (confirm("Welcome to Rock, Paper, Scissors. Ready to play?")) {
         
-        let roundResult = 0;
+//         let roundResult = 0;
 
-        for (let i = 1; i < 6; i++) {
+//         for (let i = 1; i < 6; i++) {
 
-            let playerSelection = getHumanChoice();
-            let computerSelection = getComputerChoice();
+//             let playerSelection = getHumanChoice();
+//             let computerSelection = getComputerChoice();
 
-            roundResult = playRound(playerSelection, computerSelection);
-            console.log(`The round result is ${roundResult}.`)
+//             roundResult = playRound(playerSelection, computerSelection);
+//             console.log(`The round result is ${roundResult}.`)
 
-            switch (roundResult) {
-                case 0:
-                    {
-                        console.log(`COMPUTER WINS ROUND ${i}.`)
-                        computerScore++;
-                        break;
-                    }
-                case 1:
-                    {
-                        console.log(`PLAYER WINS ROUND ${i}.`)
-                        playerScore++;
-                        break;
-                    }
-                case 2:
-                    {
-                        console.log(`NEITHER WINS ROUND ${i}.`);
-                        break;
-                    }
-                case 3:
-                    {
-                        console.log("Error in playRound function. We entered an unknown state.");
-                        console.log(`roundResult in switch case 3: ${roundResult}`);
-                        break;
-                    }
-                default:
-                    {
-                        console.log("Error in playGame function. We enterted an unknown state.");
-                        console.log(`roundResult in switch default: ${roundResult}`);
-                        break;
-                    }
-            }
-        }
+//             switch (roundResult) {
+//                 case 0:
+//                     {
+//                         console.log(`COMPUTER WINS ROUND ${i}.`)
+//                         computerScore++;
+//                         break;
+//                     }
+//                 case 1:
+//                     {
+//                         console.log(`PLAYER WINS ROUND ${i}.`)
+//                         playerScore++;
+//                         break;
+//                     }
+//                 case 2:
+//                     {
+//                         console.log(`NEITHER WINS ROUND ${i}.`);
+//                         break;
+//                     }
+//                 case 3:
+//                     {
+//                         console.log("Error in playRound function. We entered an unknown state.");
+//                         console.log(`roundResult in switch case 3: ${roundResult}`);
+//                         break;
+//                     }
+//                 default:
+//                     {
+//                         console.log("Error in playGame function. We enterted an unknown state.");
+//                         console.log(`roundResult in switch default: ${roundResult}`);
+//                         break;
+//                     }
+//             }
+//         }
 
-        if (playerScore > computerScore) {
-            console.log(`You won the overall game. You won ${playerScore} rounds and the computer won ${computerScore} rounds.`);
-        }
-        else if (playerScore < computerScore) {
-            console.log(`You lost the overall game. You won ${playerScore} rounds and the computer won ${computerScore} rounds.`);
-        }
-        else {
-            console.log("Wow it looks like you both tied!");
-        }
+//         if (playerScore > computerScore) {
+//             console.log(`You won the overall game. You won ${playerScore} rounds and the computer won ${computerScore} rounds.`);
+//         }
+//         else if (playerScore < computerScore) {
+//             console.log(`You lost the overall game. You won ${playerScore} rounds and the computer won ${computerScore} rounds.`);
+//         }
+//         else {
+//             console.log("Wow it looks like you both tied!");
+//         }
         
-    } else {
-        console.log("User clicked cancel");
-    }
+//     } else {
+//         console.log("User clicked cancel");
+//     }
 
-}
-
-playGame();
+// }
