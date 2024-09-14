@@ -109,6 +109,10 @@ function playRound(humanChoice, computerChoice) {
     return gameResult;
 }
 
+// add event listener for the buttons that call playRound function
+let btnList = document.querySelectorAll("button");
+console.log(btnList);
+
 // /**
 //  * Plays the game rock, paper, scissors. Highest score after 5 rounds is the winner
 //  */
