@@ -17,18 +17,16 @@ function getComputerChoice() {
  * 
  * @returns {string} - players choice of rock, paper, or scissors in lowercase
  */
-function getHumanChoice() {
+function getHumanChoice(choice) {
 
     do {
-        let choice = prompt("Choose between Rock, Paper, or Scissors").toLowerCase();
-        var validChoice = false;
+        // let choice = prompt("Choose between Rock, Paper, or Scissors").toLowerCase();
+        // var validChoice = false;
 
         switch (choice) {
             case ("rock"):
                 return choice;
             case ("paper"):
-                return choice;
-            case ("scissors"):
                 return choice;
             case ("scissor"):
                 return choice;
@@ -109,9 +107,23 @@ function playRound(humanChoice, computerChoice) {
     return gameResult;
 }
 
-// add event listener for the buttons that call playRound function
-let btnList = document.querySelectorAll("button");
-console.log(btnList);
+let rockBtn = document.getElementById('rock');
+rockBtn.addEventListener('click', (event) => {
+
+    playRound("rock", getComputerChoice());
+})
+
+let paperBtn = document.getElementById('paper');
+paperBtn.addEventListener('click', (event) => {
+
+    playRound("paper", getComputerChoice());
+})
+
+let scissorBtn = document.getElementById('scissor');
+scissorBtn.addEventListener('click', (event) => {
+
+    playRound("scissor", getComputerChoice());
+})
 
 // /**
 //  * Plays the game rock, paper, scissors. Highest score after 5 rounds is the winner
