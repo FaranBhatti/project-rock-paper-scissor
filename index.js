@@ -107,22 +107,23 @@ function playRound(humanChoice, computerChoice) {
     return gameResult;
 }
 
-let rockBtn = document.getElementById('rock');
-rockBtn.addEventListener('click', (event) => {
+let rpsButtons = document.querySelector('#rps-buttons');
 
-    playRound("rock", getComputerChoice());
-})
+rpsButtons.addEventListener('click', (e) => {
 
-let paperBtn = document.getElementById('paper');
-paperBtn.addEventListener('click', (event) => {
+    let clickedButton = e.target.id;
 
-    playRound("paper", getComputerChoice());
-})
-
-let scissorBtn = document.getElementById('scissor');
-scissorBtn.addEventListener('click', (event) => {
-
-    playRound("scissor", getComputerChoice());
+    switch(clickedButton) {
+        case 'rock':
+            playRound("rock", getComputerChoice());
+            break;
+        case 'paper':
+            playRound("paper", getComputerChoice());
+            break;
+        case 'scissor':
+            playRound("scissor", getComputerChoice());
+            break;
+    }
 })
 
 // /**
