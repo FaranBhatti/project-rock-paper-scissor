@@ -107,26 +107,30 @@ function playRound(humanChoice, computerChoice) {
     return gameResult;
 }
 
-let rpsButtons = document.querySelector('#rps-buttons');
+// Select all the buttons within the #rps-buttons div
+let buttons = document.querySelectorAll('#rps-buttons button');
 
-rpsButtons.addEventListener('click', (e) => {
+// Attach a click event listener to each button
+buttons.forEach(button => {
+    button.addEventListener('click', (e) => {
+        let clickedButton = e.target.id;
 
-    let clickedButton = e.target.id;
-
-    switch(clickedButton) {
-        case 'rock':
-            playRound(getHumanChoice(clickedButton), getComputerChoice());
-            break;
-        case 'paper':
-            playRound(getHumanChoice(clickedButton), getComputerChoice());
-            break;
-        case 'scissor':
-            playRound(getHumanChoice(clickedButton), getComputerChoice());
-            break;
-        default:
-            console.log("There's an error in the button being clicked!!!");
-    }
-})
+        // Switch statement based on the button clicked
+        switch (clickedButton) {
+            case 'rock':
+                playRound("rock", getComputerChoice());
+                break;
+            case 'paper':
+                playRound("paper", getComputerChoice());
+                break;
+            case 'scissor':
+                playRound("scissor", getComputerChoice());
+                break;
+            default:
+                console.log('Invalid selection');
+        }
+    });
+});
 
 // /**
 //  * Plays the game rock, paper, scissors. Highest score after 5 rounds is the winner
