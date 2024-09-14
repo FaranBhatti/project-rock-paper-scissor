@@ -115,14 +115,16 @@ rpsButtons.addEventListener('click', (e) => {
 
     switch(clickedButton) {
         case 'rock':
-            playRound("rock", getComputerChoice());
+            playRound(getHumanChoice(clickedButton), getComputerChoice());
             break;
         case 'paper':
-            playRound("paper", getComputerChoice());
+            playRound(getHumanChoice(clickedButton), getComputerChoice());
             break;
         case 'scissor':
-            playRound("scissor", getComputerChoice());
+            playRound(getHumanChoice(clickedButton), getComputerChoice());
             break;
+        default:
+            console.log("There's an error in the button being clicked!!!");
     }
 })
 
