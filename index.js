@@ -216,32 +216,38 @@ function playGame() {
         let buttons = document.querySelectorAll('#rps-buttons button');
 
         let roundResult = 0;
-        let round = 0;
 
         // Attach a click event listener to each button
         buttons.forEach(button => {
             button.addEventListener('click', (e) => {
-                let clickedButton = e.target.id;
+                if (playerScore !== 5 || computerScore !== 5) {  // Stop after one player reaches 5
+                    let clickedButton = e.target.id;
 
-                // Switch statement based on the button clicked
-                switch (clickedButton) {
-                    case 'rock':
-                        roundResult = playRound("rock", getComputerChoice());
-                        round++;
-                        break;
-                    case 'paper':
-                        roundResult = playRound("paper", getComputerChoice());
-                        round++;
-                        break;
-                    case 'scissor':
-                        roundResult = playRound("scissor", getComputerChoice());
-                        round++;
-                        break;
-                    default:
-                        console.log('Invalid selection');
+                    // Switch statement based on the button clicked
+                    switch (clickedButton) {
+                        case 'rock':
+                            roundResult = playRound("rock", getComputerChoice());
+                            break;
+                        case 'paper':
+                            roundResult = playRound("paper", getComputerChoice());
+                            break;
+                        case 'scissor':
+                            roundResult = playRound("scissor", getComputerChoice());
+                            break;
+                        default:
+                            console.log('Invalid selection');
+                    }
+
+                    updateResult(roundResult);
+
+                    // If 5 rounds are completed, disable the buttons
+                    if (playerScore === 5 || computerScore === 5) {
+                        buttons.forEach(button => {
+                            button.disabled = true;  // Disable each button
+                        });
+                        console.log('Game over!');
+                    }
                 }
-
-                updateResult(roundResult);
             });
         });
     } else {
