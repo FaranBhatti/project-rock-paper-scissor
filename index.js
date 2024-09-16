@@ -1,3 +1,10 @@
+// Select the score div
+let resultDiv = document.querySelector('#results');
+
+// keeping track of score
+let playerScore = 0;
+let computerScore = 0;
+
 /**
  * Gets the computer choice for the game Rock, Paper, Scissors
  * 
@@ -107,47 +114,6 @@ function playRound(humanChoice, computerChoice) {
     return gameResult;
 }
 
-
-
-// Select all the buttons within the #rps-buttons div
-let buttons = document.querySelectorAll('#rps-buttons button');
-
-// Select the score div
-let resultDiv = document.querySelector('#results');
-
-// keeping track of score
-let playerScore = 0;
-let computerScore = 0;
-let roundResult = 0;
-let round = 0;
-
-// Attach a click event listener to each button
-buttons.forEach(button => {
-    button.addEventListener('click', (e) => {
-        let clickedButton = e.target.id;
-
-        // Switch statement based on the button clicked
-        switch (clickedButton) {
-            case 'rock':
-                roundResult = playRound("rock", getComputerChoice());
-                round++;
-                break;
-            case 'paper':
-                roundResult = playRound("paper", getComputerChoice());
-                round++;
-                break;
-            case 'scissor':
-                roundResult = playRound("scissor", getComputerChoice());
-                round++;
-                break;
-            default:
-                console.log('Invalid selection');
-        }
-
-        updateResult(roundResult);
-    });
-});
-
 function updateResult(roundResult) {
 
     switch (roundResult) {
@@ -242,3 +208,45 @@ function updateResult(roundResult) {
 //     }
 
 // }
+
+
+function playGame() {
+    if (confirm("Welcome to Rock, Paper, Scissors. Ready to play?")) {
+
+        let buttons = document.querySelectorAll('#rps-buttons button');
+
+        let roundResult = 0;
+        let round = 0;
+
+        // Attach a click event listener to each button
+        buttons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                let clickedButton = e.target.id;
+
+                // Switch statement based on the button clicked
+                switch (clickedButton) {
+                    case 'rock':
+                        roundResult = playRound("rock", getComputerChoice());
+                        round++;
+                        break;
+                    case 'paper':
+                        roundResult = playRound("paper", getComputerChoice());
+                        round++;
+                        break;
+                    case 'scissor':
+                        roundResult = playRound("scissor", getComputerChoice());
+                        round++;
+                        break;
+                    default:
+                        console.log('Invalid selection');
+                }
+
+                updateResult(roundResult);
+            });
+        });
+    } else {
+        console.log('User clicked cancel.');
+    }
+}
+
+playGame();
