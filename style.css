@@ -1,0 +1,21 @@
+.title {
+    display:flex;
+    justify-content: center;
+    font-size: 100px;
+}
+
+#rps-buttons {
+    display: flex;
+    justify-content: space-around;
+}
+
+#rock, #paper, #scissor {
+    width: 200px;
+    height: 200px;
+}
+
+#results {
+    display:flex;
+    justify-content: center;
+    margin-top: 100px;;
+}
