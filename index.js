@@ -107,8 +107,19 @@ function playRound(humanChoice, computerChoice) {
     return gameResult;
 }
 
+
+
 // Select all the buttons within the #rps-buttons div
 let buttons = document.querySelectorAll('#rps-buttons button');
+
+// Select the score div
+let resultDiv = document.querySelector('#results');
+
+// keeping track of score
+let playerScore = 0;
+let computerScore = 0;
+let roundResult = 0;
+let round = 0;
 
 // Attach a click event listener to each button
 buttons.forEach(button => {
@@ -118,19 +129,50 @@ buttons.forEach(button => {
         // Switch statement based on the button clicked
         switch (clickedButton) {
             case 'rock':
-                playRound("rock", getComputerChoice());
+                roundResult = playRound("rock", getComputerChoice());
+                round++;
                 break;
             case 'paper':
-                playRound("paper", getComputerChoice());
+                roundResult = playRound("paper", getComputerChoice());
+                round++;
                 break;
             case 'scissor':
-                playRound("scissor", getComputerChoice());
+                roundResult = playRound("scissor", getComputerChoice());
+                round++;
                 break;
             default:
                 console.log('Invalid selection');
         }
+
+        updateResult(roundResult);
     });
 });
+
+function updateResult(roundResult) {
+
+    switch (roundResult) {
+        case 0:
+            // computer wins
+            computerScore++;
+            resultDiv.textContent = 'Computer Score: ' + computerScore + '  |  Player Score: ' + playerScore;
+            break;
+        case 1:
+            // human wins
+            playerScore++;
+            resultDiv.textContent = 'Computer Score: ' + computerScore + '  |  Player Score: ' + playerScore;
+
+            break;
+        case 2:
+            // neither win
+            resultDiv.textContent = 'Computer Score: ' + computerScore + '  |  Player Score: ' + playerScore;
+
+            break;
+        case 3:
+            // error in playRound func
+            resultDiv.textContent = 'Error in the updateResult function.'
+            break;
+    }
+}
 
 // /**
 //  * Plays the game rock, paper, scissors. Highest score after 5 rounds is the winner
@@ -152,37 +194,37 @@ buttons.forEach(button => {
 //             roundResult = playRound(playerSelection, computerSelection);
 //             console.log(`The round result is ${roundResult}.`)
 
-//             switch (roundResult) {
-//                 case 0:
-//                     {
-//                         console.log(`COMPUTER WINS ROUND ${i}.`)
-//                         computerScore++;
-//                         break;
-//                     }
-//                 case 1:
-//                     {
-//                         console.log(`PLAYER WINS ROUND ${i}.`)
-//                         playerScore++;
-//                         break;
-//                     }
-//                 case 2:
-//                     {
-//                         console.log(`NEITHER WINS ROUND ${i}.`);
-//                         break;
-//                     }
-//                 case 3:
-//                     {
-//                         console.log("Error in playRound function. We entered an unknown state.");
-//                         console.log(`roundResult in switch case 3: ${roundResult}`);
-//                         break;
-//                     }
-//                 default:
-//                     {
-//                         console.log("Error in playGame function. We enterted an unknown state.");
-//                         console.log(`roundResult in switch default: ${roundResult}`);
-//                         break;
-//                     }
-//             }
+            // switch (roundResult) {
+            //     case 0:
+            //         {
+            //             console.log(`COMPUTER WINS ROUND ${i}.`)
+            //             computerScore++;
+            //             break;
+            //         }
+            //     case 1:
+            //         {
+            //             console.log(`PLAYER WINS ROUND ${i}.`)
+            //             playerScore++;
+            //             break;
+            //         }
+            //     case 2:
+            //         {
+            //             console.log(`NEITHER WINS ROUND ${i}.`);
+            //             break;
+            //         }
+            //     case 3:
+            //         {
+            //             console.log("Error in playRound function. We entered an unknown state.");
+            //             console.log(`roundResult in switch case 3: ${roundResult}`);
+            //             break;
+            //         }
+            //     default:
+            //         {
+            //             console.log("Error in playGame function. We enterted an unknown state.");
+            //             console.log(`roundResult in switch default: ${roundResult}`);
+            //             break;
+            //         }
+            // }
 //         }
 
 //         if (playerScore > computerScore) {
